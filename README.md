@@ -19,3 +19,5 @@ Install other dependencies with:
 `conda install numpy scipy pandas matplotlib pyqt`
 
 Executables will be generated in the `/Scripts` folder of your Python environment with the names `qtplot.<exe>` and `qtplot-console.<exe>`. Associate one of these with `*.dat` files for them to be automatically opened in qtplot.
+
+Note: This version has only been tested on MacOSX
