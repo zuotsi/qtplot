@@ -1,8 +1,8 @@
-from PyQt4 import QtGui, QtCore
+from PyQt5 import QtCore, QtGui, QtWidgets
 import os
 
 
-class Settings(QtGui.QDialog):
+class Settings(QtWidgets.QDialog):
     def __init__(self, parent=None):
         super(Settings, self).__init__(parent)
 
@@ -15,24 +15,24 @@ class Settings(QtGui.QDialog):
         self.setWindowTitle("Settings")
 
         # Main vbox
-        vbl = QtGui.QVBoxLayout()
+        vbl = QtWidgets.QVBoxLayout()
 
         # Profile groupbox
-        gb_profile = QtGui.QGroupBox('Profile')
+        gb_profile = QtWidgets.QGroupBox('Profile')
         vbl.addWidget(gb_profile)
 
         # Profile vbox
-        vbl_profile = QtGui.QVBoxLayout()
+        vbl_profile = QtWidgets.QVBoxLayout()
         gb_profile.setLayout(vbl_profile)
 
         # Profile grid
-        hbl = QtGui.QHBoxLayout()
+        hbl = QtWidgets.QHBoxLayout()
         vbl_profile.addLayout(hbl)
-        lbl = QtGui.QLabel('Default (used on startup):', self)
+        lbl = QtWidgets.QLabel('Default (used on startup):', self)
         #lbl_default.setMaximumWidth(10)
         hbl.addWidget(lbl)
 
-        self.cb_default_profile = QtGui.QComboBox(self)
+        self.cb_default_profile = QtWidgets.QComboBox(self)
         self.cb_default_profile.activated.connect(self.on_default_profile_changed)
         hbl.addWidget(self.cb_default_profile)
 
@@ -40,70 +40,70 @@ class Settings(QtGui.QDialog):
         #lbl_default.setMaximumWidth(10)
         #hbl.addWidget(lbl, 2, 1)
 
-        self.lw_profiles = QtGui.QListWidget(self)
+        self.lw_profiles = QtWidgets.QListWidget(self)
         self.lw_profiles.currentItemChanged.connect(self.on_profile_changed)
         vbl_profile.addWidget(self.lw_profiles)
 
-        hbl_list = QtGui.QHBoxLayout()
+        hbl_list = QtWidgets.QHBoxLayout()
         vbl_profile.addLayout(hbl_list)
 
-        self.le_profile = QtGui.QLineEdit(self)
+        self.le_profile = QtWidgets.QLineEdit(self)
         #self.le_profile.setMaximumWidth(100)
         #self.le_profile.returnPressed.connect(self.on_min_max_entered)
         hbl_list.addWidget(self.le_profile)
 
-        self.b_add = QtGui.QPushButton('Add', self)
+        self.b_add = QtWidgets.QPushButton('Add', self)
         self.b_add.clicked.connect(self.on_add)
         #self.b_add.setMaximumWidth(50)
         hbl_list.addWidget(self.b_add)
 
-        self.b_remove = QtGui.QPushButton('Remove', self)
+        self.b_remove = QtWidgets.QPushButton('Remove', self)
         self.b_remove.clicked.connect(self.on_remove)
         #self.b_remove.setMaximumWidth(50)
         hbl_list.addWidget(self.b_remove)
 
-        self.b_save_state = QtGui.QPushButton('Save current state', self)
+        self.b_save_state = QtWidgets.QPushButton('Save current state', self)
         self.b_save_state.clicked.connect(self.on_save_state)
         #self.b_add.setMaximumWidth(50)
         hbl_list.addWidget(self.b_save_state)
 
         #"""
         # Open directory
-        hbox = QtGui.QHBoxLayout()
-        hbox.addWidget(QtGui.QLabel('Open directory:'))
+        hbox = QtWidgets.QHBoxLayout()
+        hbox.addWidget(QtWidgets.QLabel('Open directory:'))
 
-        self.le_open_directory = QtGui.QLineEdit(self)
+        self.le_open_directory = QtWidgets.QLineEdit(self)
         self.le_open_directory.setEnabled(False)
         #self.le_open_directory.setText(self.main.open_directory)
         hbox.addWidget(self.le_open_directory)
 
-        self.b_browse = QtGui.QPushButton('Browse...')
+        self.b_browse = QtWidgets.QPushButton('Browse...')
         self.b_browse.clicked.connect(self.on_open_browse)
         hbox.addWidget(self.b_browse)
         vbl_profile.addLayout(hbox)
 
         # Save directory
-        hbox = QtGui.QHBoxLayout()
-        hbox.addWidget(QtGui.QLabel('Save directory:'))
+        hbox = QtWidgets.QHBoxLayout()
+        hbox.addWidget(QtWidgets.QLabel('Save directory:'))
 
-        self.le_save_directory = QtGui.QLineEdit(self)
+        self.le_save_directory = QtWidgets.QLineEdit(self)
         self.le_save_directory.setEnabled(False)
         #self.le_save_directory.setText(self.main.save_directory)
         hbox.addWidget(self.le_save_directory)
 
-        self.b_browse = QtGui.QPushButton('Browse...')
+        self.b_browse = QtWidgets.QPushButton('Browse...')
         self.b_browse.clicked.connect(self.on_save_browse)
         hbox.addWidget(self.b_browse)
         vbl_profile.addLayout(hbox)
         #"""
 
         # QTLab .set file tree view
-        self.tree = QtGui.QTreeWidget(self)
+        self.tree = QtWidgets.QTreeWidget(self)
         self.tree.setHeaderLabels(['Name', 'Value'])
         self.tree.setColumnWidth(0, 200)
         self.tree.itemClicked.connect(self.on_item_changed)
 
-        self.b_copy = QtGui.QPushButton('Copy')
+        self.b_copy = QtWidgets.QPushButton('Copy')
         self.b_copy.clicked.connect(self.on_copy)
 
         vbl.addWidget(self.tree)
@@ -158,7 +158,7 @@ class Settings(QtGui.QDialog):
         """
 
     def on_open_browse(self, event):
-        directory = str(QtGui.QFileDialog.getExistingDirectory(self, "Select Directory"))
+        directory = str(QtWidgets.QFileDialog.getExistingDirectory(self, "Select Directory"))
 
         if directory != '':
             self.le_open_directory.setText(directory)
@@ -166,7 +166,7 @@ class Settings(QtGui.QDialog):
             self.main.profile_settings['open_directory'] = directory
 
     def on_save_browse(self, event):
-        directory = str(QtGui.QFileDialog.getExistingDirectory(self, "Select Directory"))
+        directory = str(QtWidgets.QFileDialog.getExistingDirectory(self, "Select Directory"))
 
         if directory != '':
             self.le_save_directory.setText(directory)
@@ -192,7 +192,7 @@ class Settings(QtGui.QDialog):
            len(self.lw_profiles.findItems(name, QtCore.Qt.MatchExactly)) != 0):
             return
 
-        item = QtGui.QListWidgetItem(name)
+        item = QtWidgets.QListWidgetItem(name)
         self.lw_profiles.addItem(item)
         self.lw_profiles.setCurrentItem(item)
 
@@ -249,7 +249,7 @@ class Settings(QtGui.QDialog):
 
                     text += '  ' + str(child.text(0)) + ': ' + str(child.text(1)) + '\n'
 
-        QtGui.QApplication.clipboard().setText(text)
+        QtWidgets.QApplication.clipboard().setText(text)
 
     def show_window(self):
         self.show()

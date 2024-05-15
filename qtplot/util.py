@@ -40,8 +40,8 @@ class FixedOrderFormatter(ScalarFormatter):
 
         return self.format % ((x / self.division) / (10 ** exp))
 
-    def _set_format(self, vmin, vmax):
-        pass
+    # def _set_format(self, vmin, vmax):
+    #     pass
 
     def _set_orderOfMagnitude(self, range):
         exp = np.floor(np.log10(range / 4 / self.division))
