@@ -4,7 +4,7 @@
 
 This modified version of QtPlot is compatible only with Python 3 due to the updates in PyQt5. Using the Anaconda Python distribution (https://www.continuum.io/downloads) is recommended to make installing packages like `numpy` and `scipy` easier.
 
-There might be some issues with numpy, it should works with 1.23*
+There might be some issues with numpy, it should work with 1.23*
 
 Create a new environment:
 
